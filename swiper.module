@@ -16,7 +16,7 @@ function swiper_libraries_info() {
     'vendor url' => 'http://idangero.us/swiper/',
     'download url' => 'https://github.com/nolimits4web/Swiper',
     'version arguments' => [
-      'file' => 'libraries/dist/js/swiper.min.js',
+      'file' => 'dist/js/swiper.min.js',
       // e.g. jQuery Swiper v2.1.
       'pattern' => '/Swiper v(\d+\.+\d+(\.+\d+)?)/',
       'lines' => 2,
@@ -76,8 +76,8 @@ function swiper_library_info_alter(&$libraries, $extension) {
     }
 
     // Set the correct path to where the library was downloaded.
-    $libraries['swiper']['js'][$library_path . '/dist/js/swiper.min.js'] = $libraries['swiper']['js']['swiper.jquery.min.js'];
-    unset($libraries['swiper']['js']['swiper.jquery.min.js']);
+    $libraries['swiper']['js'][$library_path . '/dist/js/swiper.min.js'] = $libraries['swiper']['js']['swiper.min.js'];
+    unset($libraries['swiper']['js']['swiper.min.js']);
 
     if (!empty($libraries['swiper']['css'])) {
       $libraries['swiper']['css']['component'][$library_path . '/dist/css/swiper.min.css'] = $libraries['swiper']['css']['component']['swiper.min.css'];
