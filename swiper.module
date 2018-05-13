@@ -72,7 +72,7 @@ function swiper_library_info_alter(&$libraries, $extension) {
     // @TODO replace 'libraries_get_path' function.
     $library_path = libraries_get_path('Swiper');
     if (strpos($library_path, '/') !== 0) {
-      $library_path = '/' . $library_path;
+      $library_path = 'http://127.0.0.1:8888'; // @ enbale for Dev mode only
     }
 
     // Set the correct path to where the library was downloaded.
