@@ -1,0 +1,20 @@
+swiper:
+  remote: http://idangero.us/swiper/
+  license:
+    name: MIT
+    url: https://github.com/nolimits4web/Swiper/blob/master/LICENSE
+  js:
+    swiper.jquery.min.js: { minified: true }
+  css:
+    component:
+      swiper.min.css: {}
+
+integration:
+  js:
+    js/swiper.load.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - swiper/swiper

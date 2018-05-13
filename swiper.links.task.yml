@@ -1,0 +1,10 @@
+entity.swiper.collection:
+  title: 'List'
+  route_name: entity.swiper.collection
+  base_route: entity.swiper.collection
+
+swiper.form_settings:
+  title: 'Advanced settings'
+  route_name: swiper.form_settings
+  base_route: entity.swiper.collection
+  weight: 2

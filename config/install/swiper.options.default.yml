@@ -1,0 +1,7 @@
+id: 'default'
+label: 'Default'
+options:
+  namespace: 'swiper-'
+  direction: 'horizontal'
+  speed: 300
+# @TODO add more options.

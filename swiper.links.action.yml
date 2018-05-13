@@ -1,0 +1,5 @@
+entity.swiper.add_form:
+  route_name: 'entity.swiper.add_form'
+  title: 'Add options'
+  appears_on:
+    - entity.swiper.collection

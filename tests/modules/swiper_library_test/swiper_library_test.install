@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install file for the swiper library test module.
+ */
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_install().
+ */
+function swiper_library_test_install() {
+  $library_folder = Settings::get('file_public_path') . '/libraries';
+  $swiper_folder = $library_folder . '/Swiper';
+  if (file_exists($swiper_folder)) {
+    return;
+  }
+
+  file_prepare_directory($library_folder, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY);
+  $zip_file = $library_folder . '/swiper.zip';
+  copy('https://github.com/nolimits4web/Swiper/archive/master.zip', $zip_file);
+  $zip = new \ZipArchive();
+  $zip->open($zip_file);
+  $zip->extractTo($library_folder);
+  rename($library_folder . '/Swiper-master', $swiper_folder);
+}

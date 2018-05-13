@@ -1,0 +1,204 @@
+<?php
+
+/**
+ * @file
+ * Swiper module hooks.
+ */
+
+use Drupal\swiper\Entity\Swiper;
+
+/**
+ * Implements hook_libraries_info().
+ */
+function swiper_libraries_info() {
+  $libraries['swiper'] = [
+    'name' => 'Swiper',
+    'vendor url' => 'http://idangero.us/swiper/',
+    'download url' => 'https://github.com/nolimits4web/Swiper',
+    'version arguments' => [
+      'file' => 'dist/js/swiper.jquery.min.js',
+      // e.g. jQuery Swiper v2.1.
+      'pattern' => '/jQuery Swiper v(\d+\.+\d+(\.+\d+)?)/',
+      'lines' => 2,
+    ],
+    'files' => [
+      'js' => [
+        'dist/js/swiper.jquery.min.js',
+      ],
+      'css' => [
+        'dist/css/swiper.css',
+      ],
+    ],
+  ];
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_libraries_info_alter().
+ */
+function swiper_libraries_info_alter(&$libraries) {
+  $debug = \Drupal::config('swiper.settings')->get('swiper_debug');
+  if ($debug) {
+    // Switch to the unminified version of the library.
+    if (isset($libraries['swiper'])) {
+      $libraries['swiper']['files']['js'] = [
+        'dist/js/jquery.swiper.js',
+      ];
+    }
+  }
+
+  // Remove the library css if privileged user disabled it.
+  if (!\Drupal::config('swiper.settings')->get('swiper_css')) {
+    if (!empty($libraries['swiper']['files']['css']) && ($key = array_search('swiper.css', $libraries['swiper']['files']['css']))) {
+      unset($libraries['swiper']['files']['css'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function swiper_library_info_alter(&$libraries, $extension) {
+  if ($extension == 'swiper' and isset($libraries['swiper'])) {
+
+    // Remove the library and/or module css if privileged user disabled it.
+    if (!\Drupal::config('swiper.settings')->get('swiper_css')) {
+      if (isset($libraries['swiper']['css'])) {
+        unset($libraries['swiper']['css']);
+      }
+    }
+
+    // @TODO replace 'libraries_get_path' function.
+    $library_path = libraries_get_path('Swiper');
+    if (strpos($library_path, '/') !== 0) {
+      $library_path = '/' . $library_path;
+    }
+
+    // Set the correct path to where the library was downloaded.
+    $libraries['swiper']['js'][$library_path . '/dist/js/swiper.jquery.min.js'] = $libraries['swiper']['js']['swiper.jquery.min.js'];
+    unset($libraries['swiper']['js']['swiper.jquery.min.js']);
+
+    if (!empty($libraries['swiper']['css'])) {
+      $libraries['swiper']['css']['component'][$library_path . '/dist/css/swiper.min.css'] = $libraries['swiper']['css']['component']['swiper.min.css'];
+      unset($libraries['swiper']['css']['component']['swiper.min.css']);
+    }
+
+    // Enable debug mode.
+    $debug = \Drupal::config('swiper.settings')->get('swiper_debug');
+    if ($debug) {
+      // Add the unminified version.
+      $libraries['swiper']['js'] = [
+        $library_path . '/dist/js/swiper.jquery.js' => [],
+      ];
+    }
+  }
+}
+
+/**
+ * Gets an array of option sets suitable for using as select list options.
+ *
+ * @return array
+ *   Array of options labels keyed by id.
+ */
+function swiper_options_list() {
+  $options = Swiper::loadMultiple();
+  $list = [];
+  foreach ($options as $name => $option) {
+    $list[$name] = $option->label();
+  }
+
+  if (empty($list)) {
+    $list[''] = t('No defined option sets');
+  }
+  return $list;
+}
+
+/**
+ * Returns array of required JavaScripts and settings for a swiper instance.
+ *
+ * @param string $id
+ *   optional ID Attribute for Swiper container.
+ * @param object $options
+ *   optional Options to load or the machine name of an existing options.
+ *
+ * @return array
+ *   Array of asset attachments.
+ */
+function swiper_add($id = NULL, $options = NULL) {
+
+  $attached = [];
+
+  // Check optionset value.
+  if (is_string($options)) {
+    $name = $options;
+    $options = Swiper::load($name);
+    if (empty($options)) {
+      \Drupal::logger('swiper')->warning('Invalid option name supplied to swiper_add: @name', ['@name' => $name]);
+      return $attached;
+    }
+  }
+
+  // Static array to remember which scripts are already attached.
+  $cache = &drupal_static(__FUNCTION__, []);
+
+  $attached['library'][] = 'swiper/integration';
+
+  // If the ID or option aren't set, it is assumed the settings will be set
+  // manually via the calling module/theme.
+  if (!empty($options) && !in_array($options->id(), $cache)) {
+    $cache[] = $options->id();
+    $attached['drupalSettings']['swiper']['options'] = [
+      $options->id() => $options->getOptions(TRUE),
+    ];
+  }
+
+  if (!empty($id)) {
+    // JavaScript settings.
+    $attached['drupalSettings']['swiper']['instances'] = [
+      $id => $options ? $options->id() : '-1',
+    ];
+    // Create an empty optionset setting if none given.
+    if (empty($options)) {
+      $attached['drupalSettings']['swiper']['options'] = [
+        '-1' => [],
+      ];
+    }
+  }
+
+  return $attached;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function swiper_theme() {
+  return [
+    // Swiper container.
+    'swiper' => [
+      'variables' => [
+        'swiper' => [],
+      ],
+      'file' => 'includes/swiper.theme.inc',
+    ],
+
+    // Slide container.
+    'swiper_list' => [
+      'variables' => [
+        'items' => [],
+        'settings' => [],
+      ],
+      'file' => 'includes/swiper.theme.inc',
+    ],
+
+    // Slide item.
+    'swiper_list_item' => [
+      'variables' => [
+        'item' => [],
+        'settings' => [],
+        'caption' => '',
+      ],
+      'file' => 'includes/swiper.theme.inc',
+    ],
+  ];
+}

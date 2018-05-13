@@ -1,0 +1,7 @@
+# Swiper optionset menu items definition.
+entity.swiper.collection:
+  title: 'Swiper'
+  description: 'Configure options and advanced settings.'
+  route_name: entity.swiper.collection
+  parent: system.admin_config_media
+  weight: 99

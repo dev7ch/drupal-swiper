@@ -1,0 +1,68 @@
+swiper.form_settings:
+  path: /admin/config/media/swiper/advanced
+  defaults:
+    _title: 'Swiper Advanced settings'
+    _form: \Drupal\swiper\Form\SwiperFormSettings
+  requirements:
+    _permission: 'administer swiper'
+
+# Swiper options routing definition.
+entity.swiper.collection:
+  path: '/admin/config/media/swiper'
+  defaults:
+    _entity_list: 'swiper'
+    _title: 'Swiper'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE
+
+entity.swiper.add_form:
+  path: '/admin/config/media/swiper/add'
+  defaults:
+    _entity_form: 'swiper.add'
+    _title: 'Add options'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE
+
+entity.swiper.edit_form:
+  path: '/admin/config/media/swiper/{swiper}'
+  defaults:
+    _entity_form: 'swiper.edit'
+    _title: 'Edit options'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE
+
+entity.swiper.delete_form:
+  path: '/admin/config/media/swiper/{swiper}/delete'
+  defaults:
+    _entity_form: 'swiper.delete'
+    _title: 'Delete options'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE
+
+entity.swiper.enable:
+  path: '/admin/config/media/swiper/{swiper}/enable'
+  defaults:
+    _controller: '\Drupal\swiper\Controller\SwiperOptionsController::enable'
+    entity_type: 'swiper'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE
+
+entity.swiper.disable:
+  path: '/admin/config/media/swiper/{swiper}/disable'
+  defaults:
+    _controller: '\Drupal\swiper\Controller\SwiperOptionsController::disable'
+    entity_type: 'swiper'
+  requirements:
+    _permission: 'administer swiper'
+  options:
+    _admin_route: TRUE

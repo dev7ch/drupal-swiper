@@ -1,0 +1,40 @@
+swiper.settings:
+  type: config_object
+  label: 'Swiper settings'
+  mapping:
+    swiper_version:
+      type: string
+    swiper_debug:
+      type: boolean
+    swiper_css:
+      type: boolean
+    swiper_module_css:
+      type: boolean
+
+swiper.options.*:
+  type: config_entity
+  label: 'Swiper options'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    options:
+      type: mapping
+      label: 'Options'
+      mapping:
+        # Advanced options
+        namespace:
+          type: string
+          label: 'Namespace'
+        # General params
+        direction:
+          type: string
+          label: 'Direction'
+        speed:
+          type: integer
+          label: 'Speed'
+
+      #TODO Add more options.
