@@ -1,0 +1,15 @@
+{
+    "name": "dev7ch/drupal-swiper",
+    "description": "Swiper integration for Drupal 8, cloned from https://cgit.drupalcode.org/swiper",
+    "homepage" : "https://github.com/dev7ch/drupal-swiper",
+    "type": "drupal-module",
+    "keywords" : ["drupal", "swiper", "drupal-module", "drupal 8 slider", "drupal 8"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Silvan Hahn",
+            "email": "silvan@dev7.ch"
+        }
+    ],
+    "require": {}
+}
