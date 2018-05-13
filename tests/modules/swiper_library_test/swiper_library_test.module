@@ -19,7 +19,7 @@ function swiper_library_test_library_info_alter(&$libraries, $extension) {
 
     // Set path to where the library was downloaded in the test environment.
     $js = \Drupal::config('swiper.settings')->get('swiper_debug') ?
-      'swiper.jquery.js' : 'swiper.jquery.min.js';
+      'swiper.js' : 'swiper.min.js';
     $libraries['swiper']['js'][$library_path_test . '/dist/js/' . $js] =
       $libraries['swiper']['js'][$library_path . '/' . $js];
     unset($libraries['swiper']['js'][$library_path . '/' . $js]);
