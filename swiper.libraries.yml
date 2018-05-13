@@ -4,7 +4,7 @@ swiper:
     name: MIT
     url: https://github.com/nolimits4web/Swiper/blob/master/LICENSE
   js:
-    swiper.jquery.min.js: { minified: true }
+    swiper.min.js: { minified: true }
   css:
     component:
       swiper.min.css: {}
