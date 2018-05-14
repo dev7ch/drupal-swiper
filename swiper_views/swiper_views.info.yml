@@ -1,0 +1,9 @@
+name: 'Swiper Views Style'
+description: 'Adds a Views style plugin for Swiper'
+core: 8.x
+package: Swiper
+dependencies:
+  - drupal:views
+  - drupal:libraries
+  - drupal:swiper
+type: module

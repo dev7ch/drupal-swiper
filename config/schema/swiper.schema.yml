@@ -1,0 +1,81 @@
+swiper.settings:
+  type: config_object
+  label: 'Swiper settings'
+  mapping:
+    swiper_version:
+      type: string
+    swiper_debug:
+      type: boolean
+    swiper_css:
+      type: boolean
+    swiper_module_css:
+      type: boolean
+swiper.setup:
+  type: config_entity
+  label: 'Swiper setup and plugin settings'
+  mapping:
+    swiper_plugin_dir:
+      type: string
+      label: 'Path to Plugin'
+    swiper_debug_mode:
+      type: boolean
+      label: 'Enable debug mode'
+
+swiper.options.*:
+  type: config_entity
+  label: 'Swiper options'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    options:
+      type: mapping
+      label: 'Options'
+      mapping:
+        # Advanced options
+        namespace:
+          type: string
+          label: 'Namespace'
+        configs:
+          type: string
+          label: 'Configs'
+        # General params
+        direction:
+          type: string
+          label: 'Direction'
+        effect:
+          type: string
+          label: 'Effect'
+        speed:
+          type: integer
+          label: 'Speed'
+        spaceBetween:
+          type: number
+          label: 'Space Between'
+        loop:
+          type: integer
+          label: 'Loop'
+        initialSlide:
+          type: number
+          label: 'initialSlide'
+        coverflowEffect:
+          slideShadows:
+           type: integer
+           label: 'Slide Shadows'
+          rotate:
+            type: number
+            label: 'Rotate'
+          stretch:
+            type: number
+            label: 'Stretch'
+          depth:
+            type: number
+            label: 'depth'
+          modifier:
+            type: number
+            label: 'Modifier'
+
+      #TODO Add more options.

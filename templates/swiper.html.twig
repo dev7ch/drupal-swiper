@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Default output for a Swiper object.
+ *
+ * Available variables:
+ * - attributes: An array of attributes to apply to the element.
+ * - content.list: A renderable array of the swiper list
+ * - settings: An array containing the given settings.
+ *
+ * @see template_preprocess_swiper()
+ */
+#}
+
+<div{{ attributes }}>
+  {{ content.list }}
+
+  {# Add Pagination #}
+  {% if settings.pagination %}
+    <div class="swiper-pagination"></div>
+  {% endif %}
+
+  {# Add navigation buttons #}
+  {% if settings.navButtons %}
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  {% endif %}
+
+  {# Add scrollbar #}
+  {% if settings.scrollbar %}
+    <div class="swiper-scrollbar"></div>
+  {% endif %}
+</div>

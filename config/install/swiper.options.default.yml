@@ -1,0 +1,8 @@
+id: 'default'
+label: 'Default'
+options:
+  namespace: 'swiper-huhu'
+  direction: 'vertical'
+  speed: 1000,
+
+# @TODO add more options.

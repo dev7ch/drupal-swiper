@@ -1,0 +1,6 @@
+name: Swiper Library Test
+description: 'Testing with downloaded library'
+core: 8.x
+package: Testing
+type: module
+hidden: true

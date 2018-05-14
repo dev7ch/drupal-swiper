@@ -1,0 +1,9 @@
+; Swiper
+
+api = 2
+core = 8.x
+
+libraries[swiper][download][type] = "get"
+libraries[swiper][download][url] = "https://github.com/nolimits4web/Swiper/zipball/master"
+libraries[swiper][directory_name] = "Swiper"
+libraries[swiper][type] = "library"
