@@ -4,5 +4,22 @@ options:
   namespace: 'swiper-default'
   direction: 'horizontal'
   speed: 1000,
+  loop: true
+  initialSlide: 3,
+  sliderPerColumn: 'row',
+  slidesPerView: 3,
+  effect: 'coverflow',
+  nextButton: '.swiper-button-next',
+  prevButton: '.swiper-button-prev',
+  coverflowEffect:
+    depth: 185,
+    modifier: 4,
+    rotate: 0,
+    slideShadows: true
+    stretch: 0
+
+
+
+
 
 # @TODO add more options.

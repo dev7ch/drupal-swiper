@@ -53,19 +53,19 @@ swiper.options.*:
           type: integer
           label: 'Speed'
         spaceBetween:
-          type: number
+          type: integer
           label: 'Space Between'
         loop:
           type: boolean
           label: 'Loop'
         initialSlide:
-          type: number
+          type: integer
           label: 'initialSlide'
         centeredSlides:
           type: boolean
           label: 'Centered Slides'
         slidesPerView:
-          type: string
+          type: integer
           label: Slides per View
         visibilityFullFit:
           type:  boolean
@@ -89,5 +89,11 @@ swiper.options.*:
           modifier:
             type: number
             label: 'Modifier'
+          nextButton:
+            type: string
+            label: 'Next Button'
+          prevButton:
+            type: string
+            label: 'Prev Button'
 
       #TODO Add more options.
