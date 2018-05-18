@@ -78,39 +78,48 @@ class SwiperForm extends EntityForm {
           '#default_value' => $options['effect'] ?? $default_options['direction'],
       ];
 
-        $form['general_params']['direction'] = [
-          '#type' => 'select',
-          '#title' => $this->t('Direction'),
-          '#description' => $this->t("Select direction. Could be 'horizontal' or 'vertical' (for vertical slider)."),
-          '#options' => [
-            'horizontal'   => $this->t('Horizontal'),
-            'vertical'  => $this->t('Vertical'),
-          ],
-          '#default_value' => $options['direction'] ?? $default_options['direction'],
-        ];
+    $form['general_params']['direction'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Direction'),
+      '#description' => $this->t("Select direction. Could be 'horizontal' or 'vertical' (for vertical slider)."),
+      '#options' => [
+        'horizontal'   => $this->t('Horizontal'),
+        'vertical'  => $this->t('Vertical'),
+      ],
+      '#default_value' => $options['direction'] ?? $default_options['direction'],
+    ];
 
-        $form['general_params']['speed'] = array(
-          '#type' => 'number',
-          '#title' => $this->t('Speed'),
-          '#description' => $this->t('Duration of transition between slides (in ms).'),
-          // Only positive numbers.
-          '#min' => 0,
-          // Only integers.
-          '#step' => 1,
-          '#default_value' => $options['speed'] ?? $default_options['speed'],
-        );
+    $form['general_params']['speed'] = array(
+      '#type' => 'number',
+      '#title' => $this->t('Speed'),
+      '#description' => $this->t('Duration of transition between slides (in ms).'),
+      // Only positive numbers.
+      '#min' => 0,
+      // Only integers.
+      '#step' => 1,
+      '#default_value' => $options['speed'] ?? $default_options['speed'],
+    );
 
-        $form['general_params']['prevButton'] = array(
-          '#type' => 'textfield',
-          '#title' => $this->t('Prev Button CSS Class'),
-          '#default_value' => $options['prevButton'] ?? $default_options['prevButton'],
-        );
+    $form['general_params']['prevButton'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Prev Button CSS Class'),
+        '#description' => $this->t('Duration of transition between slides (in ms).'),
+        '#default_value' => $options['prevButton'] ?? $default_options['prevButton'],
+    );
 
-      $form['general_params']['nextButton'] = array(
-          '#type' => 'textfield',
-          '#title' => $this->t('Next Button CSS Class'),
-          '#default_value' => $options['nextButton'] ?? $default_options['nextButton'],
-      );
+    $form['general_params']['nextButton'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Prev Button CSS Class'),
+      '#description' => $this->t('Duration of transition between slides (in ms).'),
+
+      '#default_value' => $options['nextButton'] ?? $default_options['Button'],
+    );
+
+      $form['general_params']['navButtons'] = [
+          '#type' => 'checkbox',
+          '#title' => $this->t('Enable Nav Buttons'),
+          '#default_value' => isset($options['navButtons']) ? $default_options['navButtons'] : false,
+      ];
 
 
       $form['general_params']['initialSlide'] = array(

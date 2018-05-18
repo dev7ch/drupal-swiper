@@ -65,8 +65,8 @@ swiper.options.*:
           type: boolean
           label: 'Centered Slides'
         slidesPerView:
-          type: integer
-          label: Slides per View
+          type: string
+          label: 'Slides per View'
         visibilityFullFit:
           type:  boolean
           label: 'Full fit visibilty'

@@ -6,9 +6,10 @@ swiper:
   js:
     swiper.min.js: { minified: true }
   css:
+    theme:
+      css/reflect.css: { minified: true }
     component:
       swiper.min.css: {}
-
 integration:
   js:
     js/swiper.load.js: {}

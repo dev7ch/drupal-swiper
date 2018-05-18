@@ -1,0 +1,24 @@
+.swiper-slide {
+    margin-bottom: 120px;
+    padding: 0 10px;
+    position: relative;
+    -webkit-box-reflect: below 0px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, transparent 50%, transparent 100%);
+}
+
+.swiper-slide img {
+    /*box-shadow: 15px 0 20px -20px #444444, -15px 0 20px -20px #444444;*/
+    z-index: -1;
+}
+
+.swiper-slide :before {
+    background: -moz-linear-gradient(center top, #FFFFFF, #FFFFFF 30%, rgba(255, 255, 255, 0.9) 65%, rgba(255, 255, 255, 0.7)) repeat scroll 0 0 padding-box, -moz-element(.swiper-slide ) no-repeat scroll 0 -127px content-box rgba(0, 0, 0, 0);
+    content: "";
+    height: 140px;
+    left: 0;
+    padding: 1px 0;
+    position: absolute;
+    top: 277px;
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    width: 360px;
+}
