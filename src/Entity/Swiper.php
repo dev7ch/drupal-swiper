@@ -63,6 +63,7 @@ class Swiper extends ConfigEntityBase implements SwiperInterface {
    * @var array
    */
   protected $options = [];
+  protected $install_settings = [];
 
   /**
    * {@inheritdoc}
@@ -90,8 +91,10 @@ class Swiper extends ConfigEntityBase implements SwiperInterface {
   /**
    * {@inheritdoc}
    */
-  public function getOption($name) {
-    return isset($this->options[$name]) ? $this->options[$name] : NULL;
+  public function getOption($name)
+  {
+      return isset($this->options[$name]) && $this->options[$name][0] != false ? $this->options[$name] : NULL;
+
   }
 
   /**

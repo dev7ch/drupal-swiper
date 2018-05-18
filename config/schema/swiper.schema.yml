@@ -10,6 +10,16 @@ swiper.settings:
       type: boolean
     swiper_module_css:
       type: boolean
+swiper.setup:
+  type: config_entity
+  label: 'Swiper setup and plugin settings'
+  mapping:
+    swiper_plugin_dir:
+      type: string
+      label: 'Path to Plugin'
+    swiper_debug_mode:
+      type: boolean
+      label: 'Enable debug mode'
 
 swiper.options.*:
   type: config_entity
@@ -29,12 +39,55 @@ swiper.options.*:
         namespace:
           type: string
           label: 'Namespace'
+        configs:
+          type: string
+          label: 'Configs'
         # General params
         direction:
           type: string
           label: 'Direction'
+        effect:
+          type: string
+          label: 'Effect'
         speed:
           type: integer
           label: 'Speed'
+        spaceBetween:
+          type: number
+          label: 'Space Between'
+        loop:
+          type: boolean
+          label: 'Loop'
+        initialSlide:
+          type: number
+          label: 'initialSlide'
+        centeredSlides:
+          type: boolean
+          label: 'Centered Slides'
+        slidesPerView:
+          type: string
+          label: Slides per View
+        visibilityFullFit:
+          type:  boolean
+          label: 'Full fit visibilty'
+        autoResize:
+          type: boolean
+          label: 'Auto resize'
+        coverflowEffect:
+          slideShadows:
+           type: boolean
+           label: 'Slide Shadows'
+          rotate:
+            type: number
+            label: 'Rotate'
+          stretch:
+            type: number
+            label: 'Stretch'
+          depth:
+            type: number
+            label: 'depth'
+          modifier:
+            type: number
+            label: 'Modifier'
 
       #TODO Add more options.

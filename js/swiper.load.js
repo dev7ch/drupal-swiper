@@ -48,6 +48,7 @@
     $('#' + id, context).once('swiper').each(function () {
       if (options) {
         new Swiper('#' + id, options);
+        console.log(options)
       }
       else {
         new Swiper('#' + id);

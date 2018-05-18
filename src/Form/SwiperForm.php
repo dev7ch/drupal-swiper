@@ -54,14 +54,34 @@ class SwiperForm extends EntityForm {
     $form['general_params'] = [
       '#type' => 'details',
       '#title' => $this->t('General Swiper params'),
-      '#group' => 'tabs',
+      //'#group' => 'tabs',
       '#open' => TRUE,
     ];
+
+      $form['general_params']['loop'] = [
+          '#type' => 'checkbox',
+          '#title' => 'Loop slider',
+          '#default_value' => $options['loop'] ?? $default_options['loop'],
+      ];
+
+      $form['general_params']['effect'] = [
+          '#type' => 'select',
+          '#title' => $this->t('effect'),
+          '#description' => $this->t("Tranisition effect. Could be \"slide\", \"fade\", \"cube\", \"coverflow\" or \"flip\""),
+          '#options' => [
+              'slide'   => $this->t('Slide'),
+              'fade'  => $this->t('Fade'),
+              'cube'  => $this->t('Cube'),
+              'coverflow'  => $this->t('Coverflow'),
+              'flip'  => $this->t('Flip'),
+          ],
+          '#default_value' => $options['effect'] ?? $default_options['direction'],
+      ];
 
     $form['general_params']['direction'] = [
       '#type' => 'select',
       '#title' => $this->t('Direction'),
-      '#description' => $this->t("Select deriction. Could be 'horizontal' or 'vertical' (for vertical slider)."),
+      '#description' => $this->t("Select direction. Could be 'horizontal' or 'vertical' (for vertical slider)."),
       '#options' => [
         'horizontal'   => $this->t('Horizontal'),
         'vertical'  => $this->t('Vertical'),
@@ -69,7 +89,7 @@ class SwiperForm extends EntityForm {
       '#default_value' => $options['direction'] ?? $default_options['direction'],
     ];
 
-    $form['general_params']['speed'] = [
+    $form['general_params']['speed'] = array(
       '#type' => 'number',
       '#title' => $this->t('Speed'),
       '#description' => $this->t('Duration of transition between slides (in ms).'),
@@ -78,14 +98,37 @@ class SwiperForm extends EntityForm {
       // Only integers.
       '#step' => 1,
       '#default_value' => $options['speed'] ?? $default_options['speed'],
-    ];
+    );
+      $form['general_params']['initialSlide'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Initial Slide'),
+          '#description' => $this->t('Select the starting slide'),
+          // Only positive numbers.
+          '#min' => 1,
+          // Only integers.
+          '#step' => 1,
+          '#default_value' => $options['initialSlide'] ?? $default_options['initialSlide'],
+      );
 
+      $form['general_params']['keyboardControl'] = [
+          '#type' => 'checkbox',
+          '#title' => $this->t('Enable Keyboard control'),
+          '#default_value' => $options['keyboardControl'] ?? $default_options['keyboardControl'],
+      ];
+
+
+      $form['general_params']['mousewheelControl'] = [
+          '#type' => 'checkbox',
+          '#title' => $this->t('Enable mousewheel control'),
+          '#default_value' => $options['mousewheelControl'] ?? $default_options['mousewheelControl'],
+      ];
     // Advanced Options.
     $form['advanced'] = [
       '#type' => 'details',
       '#title' => $this->t('Advanced Options'),
       '#group' => 'tabs',
     ];
+
     $form['advanced']['namespace'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Namespace'),
@@ -95,6 +138,127 @@ class SwiperForm extends EntityForm {
       '#element_validate' => ['::validateNamespace'],
       '#default_value' => isset($options['namespace']) ? $options['namespace'] : $default_options['namespace'],
     ];
+
+    $form['advanced']['coverflowEffect'] = [
+        '#type' => 'fieldset',
+        '#title' => 'Coverflow',
+        '#description' => 'Add your configs here',
+        '#tree' => true,
+        '#weight' => 30
+    ];
+      $form['advanced']['coverflowEffect']['slideShadows'] = [
+          '#type' => 'select',
+          '#title' => 'Enables slides shadows',
+          '#options' => [
+              true   => $this->t('True'),
+              false  => $this->t('False'),
+          ],
+
+          '#default_value' => $options['coverflowEffect']['slideShadows'] ?? $default_options['coverflowEffect']['slideShadows'],
+      ];
+
+      $form['advanced']['coverflowEffect']['rotate'] = [
+          '#type' => 'number',
+          '#title' => 'Slide rotate in degrees',
+          '#default_value' => $options['coverflowEffect']['rotate'] ?? $default_options['coverflowEffect']['rotate'],
+      ];
+
+      $form['advanced']['coverflowEffect']['stretch'] = [
+          '#type' => 'number',
+          '#title' => 'Stretch space between slides (in px)',
+          '#default_value' => $options['coverflowEffect']['stretch'] ?? $default_options['coverflowEffect']['stretch'],
+      ];
+
+      $form['advanced']['coverflowEffect']['depth'] = [
+          '#type' => 'number',
+          '#title' => 'Depth offset in px (slides translate in Z axis)',
+          '#default_value' => $options['coverflowEffect']['depth'] ?? $default_options['coverflowEffect']['depth'],
+      ];
+
+      $form['advanced']['coverflowEffect']['modifier'] = [
+          '#type' => 'number',
+          '#title' => 'Effect multipler',
+          '#default_value' => $options['coverflowEffect']['modifier'] ?? $default_options['coverflowEffect']['modifier'],
+      ];
+
+      # Advanced Settings
+
+      $form['advanced']['visibilityFullFit'] = [
+          '#type' => 'checkbox',
+          '#title' => 'Visibilty Full Fit',
+          '#default_value' => $options['visibilityFullFit'] ?? true
+      ];
+
+      $form['advanced']['autoResize'] = [
+          '#type' => 'checkbox',
+          '#title' => 'Auto resize',
+          '#default_value' => $options['autoResize'] ?? true
+      ];
+
+      // Grid Options.
+      $form['grid'] = [
+          '#type' => 'details',
+          '#title' => $this->t('Grid Options'),
+          '#group' => 'tabs',
+      ];
+
+      $form['grid']['spaceBetween'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Space Between'),
+          '#description' => $this->t('Distance between slides in px.'),
+          // Only integers.
+          '#step' => 1,
+          '#default_value' => $options['spaceBetween'] ?? $default_options['spaceBetween'],
+      );
+
+      $form['grid']['slidesPerView'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Slider per View'),
+          '#description' => $this->t('Number of slides per view (slides visible at the same time on slider\'s container).<br/>
+          <small>If you use it with "auto" value and along with loop: true then you need to specify loopedSlides parameter with amount of slides to loop (duplicate)</small><br/>
+          <small>slidesPerView \'auto\' is currently not compatible with multi row mode, when slidesPerColumn.</small>'),
+          // Only integers.
+          '#step' => 1,
+          '#default_value' => $options['slidesPerView'] ?? $default_options['slidesPerView'],
+      );
+      $form['grid']['sliderPerColumn'] = array(
+          '#type' => 'select',
+          '#title' => $this->t('Slides per Column'),
+          '#description' => $this->t('Number of slides per column, for multirow layout.'),
+          '#options' => [
+              'column'   => $this->t('Colum'),
+              'row'  => $this->t('Row'),
+          ],
+          '#default_value' => $options['sliderPerColumn'] ?? $default_options['sliderPerColumn'],
+      );
+      $form['grid']['sliderPerColumnFill'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Slides per Column fill'),
+          '#description' => $this->t('Could be \'column\' or \'row\'. Defines how slides should fill rows, by column or by row'),
+          // Only integers.
+          '#step' => 1,
+          '#default_value' => $options['sliderPerColumnFill'] ? $default_options['sliderPerColumnFill'] : false,
+      );
+      $form['grid']['sliderPerGroup'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Slides per Group'),
+          '#description' => $this->t('Set numbers of slides to define and enable group sliding. Useful to use with slidesPerView > 1'),
+          // Only integers.
+          '#step' => 1,
+          '#default_value' => $options['sliderPerGroup'] ? $default_options['sliderPerGroup'] : false,
+      );
+      $form['grid']['centeredSlides'] = array(
+          '#type' => 'checkbox',
+          '#title' => $this->t('Slides centered'),
+          '#default_value' => $options['centeredSlides'] ? $options['centeredSlides'] : false,
+      );
+
+      // Freemode Options.
+      $form['freeMode'] = [
+          '#type' => 'details',
+          '#title' => $this->t('Freemode Options'),
+          '#group' => 'tabs',
+      ];
 
     return $form;
   }

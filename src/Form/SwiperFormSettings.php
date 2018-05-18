@@ -113,7 +113,7 @@ class SwiperFormSettings extends ConfigFormBase {
     // Style toggles.
     $form['styles'] = [
       '#type' => 'details',
-      '#title' => $this->t('Syles'),
+      '#title' => $this->t('Styles'),
       '#open' => TRUE,
     ];
 
