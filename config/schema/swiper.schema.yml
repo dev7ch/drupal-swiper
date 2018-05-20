@@ -73,6 +73,20 @@ swiper.options.*:
         autoResize:
           type: boolean
           label: 'Auto resize'
+        keyboardControl:
+          type: boolean
+          label: 'keyboardControl'
+        mousewheelControl:
+          type: boolean
+          label: 'mousewheelControl'
+        spaceBetween:
+          type: number
+          label: 'spaceBetween'
+        sliderPerGroup:
+          type: number
+          label: 'Slider per Group'
+        sliderPerColumnFill:
+          type: boolean
         coverflowEffect:
           slideShadows:
            type: boolean
@@ -89,11 +103,27 @@ swiper.options.*:
           modifier:
             type: number
             label: 'Modifier'
+          navButtons:
+            type: boolean
+            label: 'Nav Buttons'
           nextButton:
             type: string
             label: 'Next Button'
           prevButton:
             type: string
             label: 'Prev Button'
+          paginationClass:
+            type: string
+            label: 'Pagination Class'
+          scrollbarClass:
+            type: string
+            label: 'Scrollbar Class'
+          navigation:
+            nextEl:
+              type: string
+              label: 'Next Nav Element'
+            prevEl:
+              type: string
+              label: 'Next Nav Element'
 
       #TODO Add more options.

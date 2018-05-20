@@ -18,37 +18,39 @@
  *     - separator: A string to be placed between inline fields to keep them
  *       visually distinct.
  */
-function template_preprocess_swiper_views_style(array &$variables) {
-  // Only run the preprocessor if it is a view.
-  if (empty($variables['view'])) {
-    return;
-  }
+function template_preprocess_swiper_views_style(array &$variables)
+{
+    // Only run the preprocessor if it is a view.
+    if (empty($variables['view'])) {
+        return;
+    }
 
-  $view = $variables['view'];
-  $style = $view->style_plugin;
-  $options = $style->options;
+    $view = $variables['view'];
+    $style = $view->style_plugin;
+    $options = $style->options;
 
-  $items = [];
-  $settings = [];
-  $settings['options'] = $options['options'];
-  $settings['attributes'] = ['id' => $variables['options']['id']];
+    $items = [];
+    $settings = $options;
+    $settings['attributes'] = [
+        'id' => $variables['options']['id'],
+    ];
 
-  foreach ($variables['rows'] as $row) {
-    // Render the row into a slide.
-    // @todo should use render arrays instead of actual output
-    $item['slide'] = render($row);
-    $items[] = $item;
-  }
+    foreach ($variables['rows'] as $row) {
+        // Render the row into a slide.
+        // @todo should use render arrays instead of actual output
+        $item['slide'] = render($row);
+        $items[] = $item;
 
-  $content = [
-    '#theme' => 'swiper',
-    '#swiper' => [
-      'items' => $items,
-      'settings' => $settings,
-    ],
-  ];
+    }
 
-  // Add the slide items to the variables.
-  $variables['content'] = $content;
+    $content = [
+        '#theme' => 'swiper',
+        '#swiper' => [
+            'items' => $items,
+            'settings' => $settings,
+        ],
+    ];
 
+    // Add the slide items to the variables.
+    $variables['content'] = $content;
 }

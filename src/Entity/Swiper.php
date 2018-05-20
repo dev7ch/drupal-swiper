@@ -93,7 +93,7 @@ class Swiper extends ConfigEntityBase implements SwiperInterface {
    */
   public function getOption($name)
   {
-      return isset($this->options[$name]) && $this->options[$name][0] != false ? $this->options[$name] : NULL;
+      return isset($this->options[$name]) ? $this->options[$name] : NULL;
 
   }
 

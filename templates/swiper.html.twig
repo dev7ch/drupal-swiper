@@ -12,22 +12,31 @@
  */
 #}
 
+{% set options = swiper.settings.options.options %}
+
 <div{{ attributes }}>
-  {{ content.list }}
+    {{ content.list }}
 
-  {# Add Pagination #}
-  {% if settings.pagination %}
-    <div class="swiper-pagination"></div>
-  {% endif %}
+    {# Add Pagination #}
+    {% if settings.pagination or swiper.settings.pagination %}
+        <div class="{{ swiper.settings.paginationClass | replace({'.':'', '#':'' }) }}"></div>
+    {% endif %}
 
-  {# Add navigation buttons #}
-  {% if settings.navButtons %}
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  {% endif %}
+    {# Add navigation buttons #}
+    {% if settings.scrollbar or swiper.settings.navButtons %}
+        <div class="{{ options.prevButton | replace({'.':'', '#':'' }) }}"></div>
+        <div class="{{ options.nextButton | replace({'.':'', '#':'' }) }}"></div>
+    {% endif %}
 
-  {# Add scrollbar #}
-  {% if settings.scrollbar %}
-    <div class="swiper-scrollbar"></div>
-  {% endif %}
+    {# Add scrollbar #}
+    {% if settings.scrollbar or swiper.settings.scrollbar %}
+        <div class="{{ options.scrollbarClass | replace({'.':'', '#':'' }) }}"></div>
+    {% endif %}
+
+    <pre>{{ dump(options.prevButton | replace({'.':'', '#':''})) }}</pre>
+    <pre>{{ dump(options.prevButton) }}</pre>
+    <pre>{{ dump(options.nextButton) }}</pre>
+    <pre>{{ dump(swiper.settings.navButtons) }}</pre>
+   {# <pre>{{ dump(options) }}</pre>#}
+
 </div>
