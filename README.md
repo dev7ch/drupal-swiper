@@ -1,4 +1,4 @@
-About
+Obsolete
 =====
 Integrates the Swiper library into Drupal.
 
